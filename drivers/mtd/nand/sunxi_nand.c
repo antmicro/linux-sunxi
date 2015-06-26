@@ -1072,7 +1072,6 @@ static int sunxi_nfc_hw_syndrome_ecc_read_page(struct mtd_info *mtd,
 	writel(tmp, nfc->regs + NFC_REG_ECC_CTL);
 
 	for (i = 0; i < ecc->steps; i++) {
-		chip->read_buf(mtd, NULL, ecc->size);
 		nand_rnd_config(mtd, page, offset, NAND_RND_READ);
 		nand_rnd_read_buf(mtd, NULL, ecc->size);
 
@@ -1158,7 +1157,6 @@ static int sunxi_nfc_hw_syndrome_ecc_write_page(struct mtd_info *mtd,
 	writel(tmp, nfc->regs + NFC_REG_ECC_CTL);
 
 	for (i = 0; i < ecc->steps; i++) {
-		chip->write_buf(mtd, buf + (i * ecc->size), ecc->size);
 		nand_rnd_config(mtd, -1, offset, NAND_RND_WRITE);
 		nand_rnd_write_buf(mtd, buf + (i * ecc->size), ecc->size);
 		offset += ecc->size;
