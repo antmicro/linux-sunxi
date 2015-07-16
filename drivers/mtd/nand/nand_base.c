@@ -2057,7 +2057,7 @@ static int nand_read_oob_syndrome(struct mtd_info *mtd, struct nand_chip *chip,
 	int chunk = chip->ecc.bytes + chip->ecc.prepad + chip->ecc.postpad;
 	int eccsize = chip->ecc.size;
 	uint8_t *bufpoi = chip->oob_poi;
-	int i, toread, sndrnd = 0, pos;
+	int i, toread, sndrnd = 0, pos = eccsize;
 
 	chip->cmdfunc(mtd, NAND_CMD_READ0, chip->cur_ecc->size, page);
 	for (i = 0; i < chip->cur_ecc->steps; i++) {
